@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Salad Freak",
+    "picture" : "salad-freak.jpg",
+    "description" : [" UI Design/Development"],
+    "technology" : ["HTML/CSS", "Vue JS"]
+  },
+  {
+    "name": "Cat Eyes ",
+    "picture" : "cat-eyes-web.jpg",
+    "description" : [" UI Design/Development"],
+    "technology" : ["HTML/CSS", "Vue JS"]
+  },
+  {
+    "name": "Wigxel ",
+    "picture" : "cat-eyes-web.jpg",
+    "description" : [" UI Design/Development"],
+    "technology" : ["HTML/CSS", "SCSS", "Vue JS"]
+  }
+]
