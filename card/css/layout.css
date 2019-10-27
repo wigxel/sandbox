@@ -35,22 +35,27 @@ body {
   z-index: 4;
 }
 .carousel .toggle .arrow {
-  width: 80%;
+  width: fit-content;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 3em;
   color: #323232;
+  position: relative;
+  z-index: 1000;
 }
 .carousel .toggle .arrow:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 .carousel .toggle .arrow.top {
   margin-bottom: 20px;
 }
 .carousel .toggle .arrow.btm {
   margin-top: 20px;
+  transform: rotate(180deg);
 }
 .carousel .toggle .dot {
   width: 20px;
@@ -60,6 +65,8 @@ body {
   transition: all 0.3s ease;
   margin-top: 10px;
   margin-bottom: 10px;
+  position: relative;
+  z-index: 1000;
 }
 .carousel .toggle .dot:hover {
   cursor: pointer;
@@ -72,18 +79,30 @@ body {
 .carousel .project-details {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+}
+.carousel .project-details .details-slide-holder {
+  display: grid;
   position: relative;
+  transition: 0.3s ease;
+  grid-auto-flow: row;
+  grid-template-rows: 200px;
+  position: absolute;
 }
 .carousel .project-details .project {
+  min-width: 200px;
+  height: fit-content;
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0.01;
+  transition: all 0.3s ease-in-out;
   padding: 0.8em;
-  transition: 1s ease;
-  position: absolute;
-  opacity: 0;
-  top: 300px;
 }
 .carousel .project-details .project.active {
   opacity: 1;
-  top: 10px;
+  left: 0px;
+  z-index: 2;
+  transform: scale(1.1);
 }
 .carousel .project-details .project .title {
   font-size: 2.5rem;
@@ -109,7 +128,6 @@ body {
   overflow: hidden;
 }
 .carousel .project-img .slide-holder {
-  gap: 15px;
   display: grid;
   position: relative;
   transition: 0.3s ease;
@@ -124,7 +142,6 @@ body {
   overflow: hidden;
   border-radius: 15px;
   z-index: 1;
-  margin: 0 15px;
   background: #323232;
   box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
   opacity: 0.01;
