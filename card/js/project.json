@@ -26,5 +26,12 @@
     "picture" : "cat-eyes-web.jpg",
     "description" : [" UI Design/Development"],
     "technology" : ["HTML/CSS", "SCSS", "React JS"]
+  },
+  {
+    "id" : 4,
+    "name": "Kpdlimited",
+    "picture" : "cat-eyes-web.jpg",
+    "description" : [" UI Design/Development", "COdebase"],
+    "technology" : ["HTML/CSS", "SCSS", "Vanilla Js"]
   }
 ]
