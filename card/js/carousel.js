@@ -1,85 +1,15 @@
-const projectHolder = document.querySelector(".project-details");
-const imageHolder = document.querySelector(".project-img");
+const projectHolder = document.querySelector(".details-slide-holder");
+const slider = document.querySelector(".slide-holder");
+const dotHolder = document.querySelector('.dot-holder');
+
 
 // Carousel Animation
 
 const animateCarousel = () => {
-  const descriptionSlides = projectHolder.children;
-  const imageSlides = imageHolder.children;
-  let index = 0;
-  console.log(index)
-
-  setInterval(() => {
-    const slide = descriptionSlides[index];
-    
-    slide.classList.add("active");
-    
-    
-    if (index === 0) {
-      let prev = descriptionSlides.length -1;
-      let next = 1;
-      index++
-      descriptionSlides[prev].classList.remove('active');
-      descriptionSlides[next].classList.remove('active');
-    } else if (index === descriptionSlides.length - 1) {
-      let prev = index - 1;
-      let next = 0;
-      index = 0
-      descriptionSlides[prev].classList.remove('active');
-      descriptionSlides[next].classList.remove('active');
-    } else if (index === 0) {
-      let prev = descriptionSlides.length - 1;
-      let next = 1;
-      index++
-      descriptionSlides[prev].classList.remove('active');
-      descriptionSlides[next].classList.remove('active');
-    } else {
-      let prev = index - 1;
-      let next = index + 1;
-      
-      index++
-      descriptionSlides[prev].classList.remove('active');
-      descriptionSlides[next].classList.remove('active');
-    }
-
-    
-  }, 4000);
-
-  setInterval(() => {
-    const imageSlide = imageSlides[index];
-    
-    imageSlide.classList.add("active");
-    
-    
-    if (index === 0) {
-      let prev = imageSlides.length -1;
-      let next = 1;
-      index++
-      imageSlides[prev].classList.remove('active');
-      imageSlides[next].classList.remove('active');
-    } else if (index === imageSlides.length - 1) {
-      let prev = index - 1;
-      let next = 0;
-      index = 0
-      imageSlides[prev].classList.remove('active');
-      imageSlides[next].classList.remove('active');
-    } else if (index === 0) {
-      let prev = imageSlides.length - 1;
-      let next = 1;
-      index++
-      imageSlides[prev].classList.remove('active');
-      imageSlides[next].classList.remove('active');
-    } else {
-      let prev = index - 1;
-      let next = index + 1;
-      
-      index++
-      imageSlides[prev].classList.remove('active');
-      imageSlides[next].classList.remove('active');
-    }
-    
-    console.log(index, imageSlide)
-  }, 4000);
+  projectHolder.firstElementChild.classList.add('active')
+  slider.firstElementChild.classList.add('active')
+  dotHolder.firstElementChild.classList.add('active')
+ 
 }
 
 
@@ -115,24 +45,26 @@ const createProjects = (response) => {
       </div>
 
     `
-    projectHolder.append(project)
-    return project
+    projectHolder.append(project);
+
+    // create images 
+    const figure = document.createElement('div');
+    figure.classList.add('image');
+    figure.innerHTML = `
+      <img src="${portfolio.picture}" alt="">
+    `
+    slider.append(figure);
+
+    // create dots
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    dot.setAttribute("onclick", `activateToggle(${portfolio.id})`)
+    dotHolder.append(dot)
   })
   
-  console.log(projects[1].description, projectHolder)
+  // Animate the carousel  
   animateCarousel();
 }
-
-// adds the list to the DOM
-const addToList = (arr, selector) => {
-  const listHolder = document.querySelector(selector)
-  listHolder.innerHTML = '';
-  for (let listEl of arr) {
-      listHolder.append(listEl)
-  }
-}
-
-
 
 const fetchProjects = () => {
   const api = "./js/project.json";
