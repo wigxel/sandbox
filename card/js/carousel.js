@@ -1,34 +1,26 @@
 const projectHolder = document.querySelector(".details-slide-holder");
 const slider = document.querySelector(".slide-holder");
-const dotHolder = document.querySelector('.dot-holder');
-
+const dotHolder = document.querySelector(".dot-holder");
 
 // Carousel Animation
-
 const animateCarousel = () => {
-  projectHolder.firstElementChild.classList.add('active')
-  slider.firstElementChild.classList.add('active')
-  dotHolder.firstElementChild.classList.add('active')
- 
-}
+  projectHolder.firstElementChild.classList.add("active");
+  slider.firstElementChild.classList.add("active");
+  document.querySelector('.dots .dot').classList.add("active");
+};
 
-
-const createProjects = (response) => {
-  const projects = response;
-
-  projects.map((portfolio) => {
-    const project = document.createElement('div');
-    project.classList.add('project');
-    project.innerHTML = `
-      <h1 class="title">${portfolio.name}</h1>
-
+const buildProject = ({ name, description, technology }) => {
+  const project = document.createElement("div");
+  project.classList.add("project");
+  project.innerHTML = `
+      <h1 class="title">${name}</h1>
       <div class="description">
         <p class="header">
           DESCRIPTION
         </p>
         <div class="descript">
-          ${portfolio.description.reduce((le, des) => {
-           return le += `<p>${des}</p>`
+          ${description.reduce((le, des) => {
+            return (le += `<p>${des}</p>`);
           }, "")}
         </div>
       </div>
@@ -38,41 +30,56 @@ const createProjects = (response) => {
           frontend
         </p>
         <div class="technologies">
-          ${portfolio.technology.reduce((le, des) => {
-           return le += `<p>${des}</p>`
+          ${technology.reduce((le, des) => {
+            return (le += `<p>${des}</p>`);
           }, "")}
         </div>
       </div>
+    `;
+  return project;
+};
 
-    `
-    projectHolder.append(project);
-
-    // create images 
-    const figure = document.createElement('div');
-    figure.classList.add('image');
-    figure.innerHTML = `
-      <img src="${portfolio.picture}" alt="">
-    `
-    slider.append(figure);
-
+const createProjects = projects => {
+  projects.map((portfolio, index) => {
+    console.log(portfolio)
+    projectHolder.append(buildProject(portfolio));
+    // create images
+    slider.append(createImage(portfolio));
     // create dots
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    dot.setAttribute("onclick", `activateToggle(${portfolio.id})`)
-    dotHolder.append(dot)
-  })
+    dotHolder.appendChild(createDot(index));
+  });
+  slider.style.gridTemplateColumns = (getSlideWidth() + 'px')
   
-  // Animate the carousel  
+  // Animate the carousel
   animateCarousel();
+};
+
+function createDot(id) {
+  const dot = document.createElement("div");
+  dot.classList.add("dot");
+  dot.setAttribute("onclick", () => activateToggle(id));
+
+  return dot;
+}
+
+function createImage({ picture }) {
+  const figure = document.createElement("div");
+  figure.classList.add("image");
+  figure.style.width = (getSlideWidth() - 40) + 'px';
+  figure.style.height = '350px';
+  figure.innerHTML = `
+    <img src="${picture}" alt="">
+  `;
+  return figure;
 }
 
 const fetchProjects = () => {
   const api = "./js/project.json";
   fetch(api)
-  .then(res => res.json())
-  .then(response => {
-    createProjects(response);
-  })
-}
+    .then(res => res.json())
+    .then(response => {
+      createProjects(response);
+    });
+};
 
-fetchProjects();
+window.addEventListener('load', fetchProjects);

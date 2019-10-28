@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -13,23 +13,32 @@ body {
   overflow-x: hidden;
 }
 
+.outline *  {
+  // border: solid 1px red;
+}
+
+%transition {
+    transition: all 0.7s linear;
+}
+
 .carousel {
-  height: fit-content;
-  width: 80vw;
-  margin: 20px auto;
+  min-height: 100vh;
+  width: 100%;
   display: grid;
+  align-items: center;
+  padding: 5vh;
   grid-template-columns: 100px 1fr 1.6fr;
   gap: 20px;
-  -moz-column-gap: 20px;
-  -webkit-column-gap: 20px;
   overflow: hidden;
-  padding: 100px;
 
   .toggle {
     width: 100%;
     max-width: 100%;
     display: flex;
     flex-flow: column;
+    padding: 50px 15px;
+    height: 100%;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 4;
@@ -40,47 +49,50 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3em;
       color: rgba(50, 50, 50, 1);
       position: relative;
       z-index: 1000;
+
+      svg {
+        transform: scale(1.5);
+      }
 
       &:hover {
         transform: scale(1.1);
         // box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1) ;
         text-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
         cursor: pointer;
-
       }
 
       &.top {
         margin-bottom: 20px;
+        transform: rotate(180deg);
       }
 
       &.btm {
         margin-top: 20px;
-        transform: rotate(180deg);
       }
     }
 
     .dot {
-      width: 20px;
-      height: 20px;
+      @extend %transition;
+
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: rgba(100, 100, 100, .5);
-      transition: all 0.3s ease;
-      margin-top: 10px;
-      margin-bottom: 10px;
+      background: rgba(100, 100, 100, 0.5);
+      margin-top: 1rem;
+      margin-bottom: 1rem;
       position: relative;
       z-index: 1000;
 
       &:hover {
         cursor: pointer;
-        box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1) ;
+        box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
       }
 
-      &.active { 
-        transform: scale(1.2);
+      &.active {
+        transform: scale(1.5);
         background: rgba(100, 100, 100, 1);
       }
     }
@@ -90,32 +102,46 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    position: relative;
 
-    .details-slide-holder {
-      display: grid;
-      position: relative;
-      transition: 0.3s ease;
-      grid-auto-flow: row;
-      grid-template-rows: 200px;
+    .detials-pos {
+      @extend %transition;
       position: absolute;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      right: 0;
+      bottom: 0;
+      left: 0;
     }
 
-    .project {
+    .details-slide-holder {
+      @extend %transition;
 
-      min-width: 200px;
-      height: fit-content;
+      display: grid;
+      position: relative;
+      grid-gap: 30px;
+      grid-auto-flow: row;
+      position: absolute;
+      top: 25%;
+      z-index: 4;
+    }
+    
+    .project {
+      opacity: 0;
+      width: auto;
       overflow: hidden;
-      z-index: 1;
-      opacity: .01; 
-      transition: all .3s ease-in-out;
       padding: 0.8em;
-      
+      // background: white;
+      transition: all 0.5s linear;
+      box-shadow: 0 0 0px 3px rgba(0, 0, 0, 0);
+
       // transition
-      &.active { 
+      &.active {
         opacity: 1;
-        left: 0px;
         z-index: 2;
-        transform: scale(1.1); 
+        // transform: scale(1.1);
+        // box-shadow: 0 0 24px 3px rgba(0, 0, 0, 0.16);
       }
 
       .title {
@@ -145,20 +171,29 @@ body {
   .project-img {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    position: relative;
+
+    .project-pos {
+      display: flex;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      align-items: center;
+    }
 
     .slide-holder {
-      //  gap: 15px;
-       display: grid;
-       position: relative;
-       transition: 0.3s ease;
-       grid-auto-flow: column;
-       grid-template-columns: 400px;
-       position: absolute;
+      @extend %transition;
+      display: grid;
+      position: relative;
+      grid-gap: 15px;
+      grid-auto-flow: column;
+      grid-template-columns: 400px;
+      position: absolute;
     }
 
     // transition
-    
     .image {
       min-width: 400px;
       width: 80%;
@@ -167,34 +202,23 @@ body {
       border-radius: 15px;
       z-index: 1;
       background: rgba(50, 50, 50, 1);
-      box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
-      opacity: .01; 
-      transition: all .3s ease-in-out;
-      
-      &.active { 
+      // box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      @extend %transition;
+
+      &.active {
         opacity: 1;
         left: 0px;
         z-index: 2;
-        transform: scale(1.1); 
       }
-       
-      // &.active {
-      //   cursor: pointer;
-      //   box-shadow: 0 0 7px 7px rgba(0, 0, 0, 0.3);
-      // }
     }
 
-    
-    
- 
-    img { 
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-
 }
 
 // animation transition
-

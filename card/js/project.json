@@ -10,7 +10,7 @@
     "id" : 1,
     "name": "Cat Eyes ",
     "picture" : "cat-eyes-web.jpg",
-    "description" : [" UI Design/Development"],
+    "description" : ["UI Design/Development"],
     "technology" : ["HTML/CSS", "Vue JS"]
   },
   {

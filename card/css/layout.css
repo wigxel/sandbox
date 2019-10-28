@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -13,23 +13,28 @@ body {
   overflow-x: hidden;
 }
 
+.carousel .project-img .image, .carousel .project-img .slide-holder, .carousel .project-details .details-slide-holder, .carousel .project-details .detials-pos, .carousel .toggle .dot {
+  transition: all 0.7s linear;
+}
+
 .carousel {
-  height: fit-content;
-  width: 80vw;
-  margin: 20px auto;
+  min-height: 100vh;
+  width: 100%;
   display: grid;
+  align-items: center;
+  padding: 5vh;
   grid-template-columns: 100px 1fr 1.6fr;
   gap: 20px;
-  -moz-column-gap: 20px;
-  -webkit-column-gap: 20px;
   overflow: hidden;
-  padding: 100px;
 }
 .carousel .toggle {
   width: 100%;
   max-width: 100%;
   display: flex;
   flex-flow: column;
+  padding: 50px 15px;
+  height: 100%;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   z-index: 4;
@@ -40,10 +45,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3em;
   color: #323232;
   position: relative;
   z-index: 1000;
+}
+.carousel .toggle .arrow svg {
+  transform: scale(1.5);
 }
 .carousel .toggle .arrow:hover {
   transform: scale(1.1);
@@ -52,19 +59,18 @@ body {
 }
 .carousel .toggle .arrow.top {
   margin-bottom: 20px;
+  transform: rotate(180deg);
 }
 .carousel .toggle .arrow.btm {
   margin-top: 20px;
-  transform: rotate(180deg);
 }
 .carousel .toggle .dot {
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(100, 100, 100, 0.5);
-  transition: all 0.3s ease;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   position: relative;
   z-index: 1000;
 }
@@ -73,36 +79,44 @@ body {
   box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 .carousel .toggle .dot.active {
-  transform: scale(1.2);
+  transform: scale(1.5);
   background: #646464;
 }
 .carousel .project-details {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
+}
+.carousel .project-details .detials-pos {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 .carousel .project-details .details-slide-holder {
   display: grid;
   position: relative;
-  transition: 0.3s ease;
+  grid-gap: 30px;
   grid-auto-flow: row;
-  grid-template-rows: 200px;
   position: absolute;
+  top: 25%;
+  z-index: 4;
 }
 .carousel .project-details .project {
-  min-width: 200px;
-  height: fit-content;
+  opacity: 0;
+  width: auto;
   overflow: hidden;
-  z-index: 1;
-  opacity: 0.01;
-  transition: all 0.3s ease-in-out;
   padding: 0.8em;
+  transition: all 0.5s linear;
+  box-shadow: 0 0 0px 3px rgba(0, 0, 0, 0);
 }
 .carousel .project-details .project.active {
   opacity: 1;
-  left: 0px;
   z-index: 2;
-  transform: scale(1.1);
 }
 .carousel .project-details .project .title {
   font-size: 2.5rem;
@@ -125,12 +139,21 @@ body {
 .carousel .project-img {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  position: relative;
+}
+.carousel .project-img .project-pos {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
 }
 .carousel .project-img .slide-holder {
   display: grid;
   position: relative;
-  transition: 0.3s ease;
+  grid-gap: 15px;
   grid-auto-flow: column;
   grid-template-columns: 400px;
   position: absolute;
@@ -143,15 +166,12 @@ body {
   border-radius: 15px;
   z-index: 1;
   background: #323232;
-  box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
-  opacity: 0.01;
-  transition: all 0.3s ease-in-out;
+  opacity: 0;
 }
 .carousel .project-img .image.active {
   opacity: 1;
   left: 0px;
   z-index: 2;
-  transform: scale(1.1);
 }
 .carousel .project-img img {
   width: 100%;
